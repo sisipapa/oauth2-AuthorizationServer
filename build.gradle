@@ -30,6 +30,9 @@ dependencies {
     implementation 'com.google.code.gson:gson'
     implementation 'org.springframework.cloud:spring-cloud-starter-security:2.1.2.RELEASE'
     implementation 'org.springframework.cloud:spring-cloud-starter-oauth2:2.1.2.RELEASE'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine'
 }
 
 test {
