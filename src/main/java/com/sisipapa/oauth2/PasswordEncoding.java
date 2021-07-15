@@ -5,7 +5,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class PasswordEncoding {
     public static void main(String[] args){
+//        PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+//        System.out.printf("testSecret : %s\n", passwordEncoder.encode("testSecret"));
         PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        System.out.printf("testSecret : %s\n", passwordEncoder.encode("testSecret"));
+        System.out.printf("secondappsecret : %s\n", passwordEncoder.encode("secondappsecret"));
     }
 }
