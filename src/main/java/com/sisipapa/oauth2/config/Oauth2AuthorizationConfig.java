@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -12,6 +13,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
 
 import javax.sql.DataSource;
 
@@ -53,7 +55,6 @@ public class Oauth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         super.configure(endpoints);
-//        endpoints.accessTokenConverter(jwtAccessTokenConverter());
         endpoints.accessTokenConverter(jwtAccessTokenConverter()).userDetailsService(userDetailService);
     }
 
@@ -62,12 +63,21 @@ public class Oauth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
      *
      * @return
      */
+//    @Bean
+//    public JwtAccessTokenConverter jwtAccessTokenConverter() {
+//        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+//        converter.setSigningKey(signKey);
+//        return converter;
+//    }
+
+    /**
+     * jwt converter - 비대칭 키 sign
+     */
     @Bean
     public JwtAccessTokenConverter jwtAccessTokenConverter() {
-//        return new JwtAccessTokenConverter();
+        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new FileSystemResource("src/main/resources/oauth2jwt.jks"), "oauth2jwtpass".toCharArray());
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-        converter.setSigningKey(signKey);
+        converter.setKeyPair(keyStoreKeyFactory.getKeyPair("oauth2jwt"));
         return converter;
     }
-
 }
