@@ -216,8 +216,7 @@ Caused by: java.lang.ClassNotFoundException: org.springframework.boot.context.pr
   
 [SISIPAPA 노트연결](https://sisipapa.github.io/blog/2021/07/12/Springboot-Oauth2-AuthorizationServer/)     
   
-    
-      
+===================================================================================================================================================================================
 
 이전에는 inMemory 방식으로 서버에서 하드코딩된 인증정보를 통해 인증을 진행 했던 부분을 DB를 사용해 처리할 수 있도록 수정할 예정이다.  
 [아빠프로그래머 Spring Boot Oauth2 - AuthorizationServer : DB처리,JWT토큰 방식 적용](https://daddyprogrammer.org/post/1287/spring-oauth2-authorizationserver-database/) 블로그를 참고해서 진행할 예정이다.
